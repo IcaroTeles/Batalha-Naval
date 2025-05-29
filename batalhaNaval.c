@@ -5,12 +5,12 @@
 // Siga os comentários para implementar cada parte do desafio.
 
 
-    //=========== RECURSIVA PARA MOSTRAR O TABULEIRO
+//=========== RECURSIVA PARA MOSTRAR O TABULEIRO
 
 void mostrar (int matriz[10][10]) {
 
-    // PÕE AS LETRAS NA PARTE SUPERIOR DA MATRIZ
-
+    //========== PÕE AS LETRAS NA PARTE SUPERIOR DA MATRIZ
+    printf ("\n");
     printf("  ");
     for (char c = 'A'; c <= 'I'; c++) {
         printf("%c ", c);
@@ -26,7 +26,9 @@ void mostrar (int matriz[10][10]) {
         printf("\n");
     }
 }
-//========== MOSTRAR FORMATO DA HABILIDADE
+
+//=========== MOSTRAR FORMATO DA HABILIDADE
+
 void habilidade (int matriz [3][5]){
 
     printf ("\n");
@@ -39,22 +41,25 @@ void habilidade (int matriz [3][5]){
     }
 }
 
+//============ USO DAS HABILIDADES
+
 void usa_cone(int matriz[10][10]) {
     int linha_topo; 
     int coluna_topo;
     char letra;
 
-    printf("Digite uma posição (ex: C5): ");
+    printf("Digite uma posição para lançar-mos a habilidade! (ex: C5): ");
     scanf(" %c%d", &letra, &linha_topo);
 
     coluna_topo = (letra - 'A') + 1;
 
     for (int i = 0; i < 3; i++) {
         int lin = linha_topo + i;
-        if (lin >= 9) break;  // Evita ultrapassar os limites da matriz
+        //==========EVITA SAIR DA MATRIZ
+        if (lin >= 9) break; 
 
         for (int j = coluna_topo - i; j <= coluna_topo + i; j++) {
-            if (j >= 0 && j < 10)  // Garante que está dentro dos limites da matriz
+            if (j >= 0 && j < 10)
                 matriz[lin][j] = 1;
             else {
                 printf("posição inválida \n");
@@ -66,11 +71,11 @@ void usa_cone(int matriz[10][10]) {
 
 int main() {
 
-    //========== TABULEIRO
-    int tabuleiro [10][10];
     //========== HABILIDADES
     int cone [3][5], cruz [3][5], octaedro [3][5];
-    
+
+    //========== MONTAGEM DO TABULEIRO
+    int tabuleiro [10][10];
     int i, j;
 
     //========== LÊ A MATRIZ
@@ -94,19 +99,24 @@ int main() {
         tabuleiro[i][0] = i;
     }
 
-    usa_cone (tabuleiro);
-
-    // ========== MOSTRA A TABELA PÓS CÓDIGO
+    printf ("Seja bem vindo ao jogo de Batalha naval!\n");
+    printf ("Logo a baixo você verá o nosso tabuleiro, já com 5 navios poisicionados!\n");
+    printf ("Os navios são representados pelo número 3 e a água pelo 0. \n");
+    // ========== MOSTRA O TABULEIRO
     mostrar (tabuleiro);
 
-    printf("\nHABILIDADE CONE\n");  
-    habilidade (cone);
+    printf ("\nEntão, que tal escolhermos algumas habilidades para começarmos a jogar?\n");
+
+    printf("\nHABILIDADE CONE\n");
+    usa_cone (tabuleiro);
+    
+    mostrar (tabuleiro);
+   
 
     printf("\nHABILIDADE CRUZ\n");
-    habilidade (cruz);
+    
 
     printf("\nHABILIDADE OCTAEDRO\n");
-    habilidade (octaedro);
     
 
     // Nível Aventureiro - Expansão do Tabuleiro e Posicionamento Diagonal
