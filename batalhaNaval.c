@@ -11,7 +11,11 @@ void mostrar (int matriz[10][10]) {
 
     // PÕE AS LETRAS NA PARTE SUPERIOR DA MATRIZ
 
-    printf ("  A B C D E F G H I\n");
+    printf("  ");
+    for (char c = 'A'; c <= 'I'; c++) {
+        printf("%c ", c);
+    }
+    printf("\n");
 
     //========== PERCORRE E IMPRIME A TABELA
 
@@ -22,17 +26,41 @@ void mostrar (int matriz[10][10]) {
         printf("\n");
     }
 }
-
+//========== MOSTRAR FORMATO DA HABILIDADE
 void habilidade (int matriz [3][5]){
 
     printf ("\n");
 
     for (int i = 0; i < 3; i++) {
         for (int j = 0; j < 5; j++) {
-            matriz[i][j] = 0;
             printf("%d ", matriz[i][j]);
         }
         printf("\n");
+    }
+}
+
+void usa_cone(int matriz[10][10]) {
+    int linha_topo; 
+    int coluna_topo;
+    char letra;
+
+    printf("Digite uma posição (ex: C5): ");
+    scanf(" %c%d", &letra, &linha_topo);
+
+    coluna_topo = (letra - 'A') + 1;
+
+    for (int i = 0; i < 3; i++) {
+        int lin = linha_topo + i;
+        if (lin >= 9) break;  // Evita ultrapassar os limites da matriz
+
+        for (int j = coluna_topo - i; j <= coluna_topo + i; j++) {
+            if (j >= 0 && j < 10)  // Garante que está dentro dos limites da matriz
+                matriz[lin][j] = 1;
+            else {
+                printf("posição inválida \n");
+                break;
+            }
+        }
     }
 }
 
@@ -66,10 +94,12 @@ int main() {
         tabuleiro[i][0] = i;
     }
 
+    usa_cone (tabuleiro);
+
     // ========== MOSTRA A TABELA PÓS CÓDIGO
     mostrar (tabuleiro);
 
-    printf("\nHABILIDADE CONE\n");
+    printf("\nHABILIDADE CONE\n");  
     habilidade (cone);
 
     printf("\nHABILIDADE CRUZ\n");
