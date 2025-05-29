@@ -4,11 +4,80 @@
 // Este código inicial serve como base para o desenvolvimento do sistema de Batalha Naval.
 // Siga os comentários para implementar cada parte do desafio.
 
+
+    //=========== RECURSIVA PARA MOSTRAR O TABULEIRO
+
+void mostrar (int matriz[10][10]) {
+
+    // PÕE AS LETRAS NA PARTE SUPERIOR DA MATRIZ
+
+    printf ("  A B C D E F G H I\n");
+
+    //========== PERCORRE E IMPRIME A TABELA
+
+    for (int i = 0; i < 10; i++) {
+        for (int j = 0; j < 10; j++) {
+            printf("%d ", matriz[i][j]);
+        }
+        printf("\n");
+    }
+}
+
+void habilidade (int matriz [3][5]){
+
+    printf ("\n");
+
+    for (int i = 0; i < 3; i++) {
+        for (int j = 0; j < 5; j++) {
+            matriz[i][j] = 0;
+            printf("%d ", matriz[i][j]);
+        }
+        printf("\n");
+    }
+}
+
 int main() {
-    // Nível Novato - Posicionamento dos Navios
-    // Sugestão: Declare uma matriz bidimensional para representar o tabuleiro (Ex: int tabuleiro[5][5];).
-    // Sugestão: Posicione dois navios no tabuleiro, um verticalmente e outro horizontalmente.
-    // Sugestão: Utilize `printf` para exibir as coordenadas de cada parte dos navios.
+
+    //========== TABULEIRO
+    int tabuleiro [10][10];
+    //========== HABILIDADES
+    int cone [3][5], cruz [3][5], octaedro [3][5];
+    
+    int i, j;
+
+    //========== LÊ A MATRIZ
+    for ( i = 0; i < 10; i++) {
+        for ( j = 0; j < 10; j++) {
+    //========== DECLARA AS CONDIÇÕES DAS POSIÇÕES VERTICAIS E HORIZONTAIS DOS NAVIOS
+            if ((i == 9 && j >= 2 && j <= 4) || 
+            (i == 7 && j >= 5 && j <= 7) || 
+            (j == 9 && i >= 2 && i <= 4) ||
+    //========== POSICIONA NAVIOS NAS DIAGONAIS PRINCIPAIS DIREITA E ESQUERDA        
+            (i == j && j >= 1 && j <= 3) ||
+            (i + j == 9 && j >= 1 && j <= 3)) {
+    //========== DEFINE 3 NAS POSIÇÕES DOS NAVIOS
+                tabuleiro[i][j] = 3;
+            } else {
+    //========== DEFINE O RESTANTE COM 0
+                tabuleiro[i][j] = 0;
+            }
+        }
+    //========== LISTA PRIMEIRA COLUNA COM NUMERAÇÃO 0 A 9
+        tabuleiro[i][0] = i;
+    }
+
+    // ========== MOSTRA A TABELA PÓS CÓDIGO
+    mostrar (tabuleiro);
+
+    printf("\nHABILIDADE CONE\n");
+    habilidade (cone);
+
+    printf("\nHABILIDADE CRUZ\n");
+    habilidade (cruz);
+
+    printf("\nHABILIDADE OCTAEDRO\n");
+    habilidade (octaedro);
+    
 
     // Nível Aventureiro - Expansão do Tabuleiro e Posicionamento Diagonal
     // Sugestão: Expanda o tabuleiro para uma matriz 10x10.
