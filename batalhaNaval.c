@@ -187,7 +187,7 @@ int main() {
     mostrar (tabuleiro);
 
     printf("\nHABILIDADE OCTAEDRO\n");
-    printf ("A habilidade CONE, tem como padrão a seguinte formação:\n");
+    printf ("A habilidade OCTAEDRO, tem como padrão a seguinte formação:\n");
     printf ("     1     \n");
     printf ("   1 1 1   \n");
     printf ("     1    \n");
@@ -196,7 +196,7 @@ int main() {
     
 
     printf("\nHABILIDADE CRUZ\n");
-    printf ("A habilidade CONE, tem como padrão a seguinte formação:\n");
+    printf ("A habilidade CRUZ, tem como padrão a seguinte formação:\n");
     printf ("     1     \n");
     printf (" 1 1 1 1 1 \n");
     printf ("     1    \n");
