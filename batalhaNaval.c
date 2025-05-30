@@ -53,6 +53,11 @@ void usa_cone(int matriz[10][10]) {
 
     coluna_topo = (letra - 'A') + 1;
 
+     if (linha_topo < 0 || linha_topo + 2 >= 10 || coluna_topo - 2 < 0 || coluna_topo + 2 >= 10) {
+        printf("Posição inválida para lançar o cone.\n");
+        return;
+    }
+
     for (int i = 0; i < 3; i++) {
         int lin = linha_topo + i;
         //==========EVITA SAIR DA MATRIZ
@@ -61,18 +66,83 @@ void usa_cone(int matriz[10][10]) {
         for (int j = coluna_topo - i; j <= coluna_topo + i; j++) {
             if (j >= 0 && j < 10)
                 matriz[lin][j] = 1;
-            else {
-                printf("posição inválida \n");
-                break;
+        }
+    }
+}
+
+void usa_octaedro(int matriz[10][10]) {
+    int linha_topo;
+    int coluna_topo;
+    char letra;
+
+    printf("Digite uma posição para lançar a habilidade OCTAEDRO! (ex: C5): ");
+    scanf(" %c%d", &letra, &linha_topo);
+
+    coluna_topo = (letra - 'A') + 1;
+
+    if (linha_topo < 0 || linha_topo + 2 >= 10 || coluna_topo - 2 < 0 || coluna_topo + 2 >= 10) {
+        printf("Posição inválida para lançar a cruz.\n");
+        return;
+    }
+
+    // Desenha o octaedro na matriz (início = 1 do topo central)
+    int padrao[3][5] = {
+        {0, 0, 1, 0, 0},
+        {0, 1, 1, 1, 0},
+        {0, 0, 1, 0, 0}
+    };
+
+    for (int i = 0; i < 3; i++) {
+        int lin = linha_topo + i;
+
+        for (int j = 0; j < 5; j++) {
+            int col = coluna_topo - 2 + j;
+
+            if (padrao[i][j] == 1) {
+                matriz[lin][col] = 1;
+        }
+    }
+}
+}
+
+void usa_cruz(int matriz[10][10]) {
+    int linha_topo;
+    int coluna_topo;
+    char letra;
+
+    printf("Digite uma posição para lançar a habilidade em Cruz! (ex: C5): ");
+    scanf(" %c%d", &letra, &linha_topo);
+
+    coluna_topo = letra - 'A' + 1;
+
+    if (linha_topo < 0 || linha_topo + 2 >= 10 || coluna_topo - 2 < 0 || coluna_topo + 2 >= 10) {
+        printf("Posição inválida para lançar a Cruz.\n");
+        return;
+    }
+
+    // Padrão da estrela
+    int padrao[3][5] = {
+        {0, 0, 1, 0, 0},
+        {1, 1, 1, 1, 1},
+        {0, 0, 1, 0, 0}
+    };
+
+    printf("Posições atingidas:\n");
+
+    for (int i = 0; i < 3; i++) {
+        int lin = linha_topo + i;
+
+        for (int j = 0; j < 5; j++) {
+            int col = coluna_topo - 2 + j;
+
+            if (padrao[i][j] == 1) {
+                matriz[lin][col] = 1;
             }
         }
     }
 }
 
 int main() {
-
-    //========== HABILIDADES
-    int cone [3][5], cruz [3][5], octaedro [3][5];
 
     //========== MONTAGEM DO TABULEIRO
     int tabuleiro [10][10];
@@ -105,19 +175,35 @@ int main() {
     // ========== MOSTRA O TABULEIRO
     mostrar (tabuleiro);
 
-    printf ("\nEntão, que tal escolhermos algumas habilidades para começarmos a jogar?\n");
+    printf ("\nEntão, que tal usarmos algumas habilidades para começarmos a jogar?\n");
 
     printf("\nHABILIDADE CONE\n");
-    usa_cone (tabuleiro);
-    
-    mostrar (tabuleiro);
-   
+    printf ("A habilidade CONE, tem como padrão a seguinte formação:\n");
+    printf ("     1     \n");
+    printf ("   1 1 1   \n");
+    printf (" 1 1 1 1 1\n");
 
-    printf("\nHABILIDADE CRUZ\n");
-    
+    usa_cone (tabuleiro);
+    mostrar (tabuleiro);
 
     printf("\nHABILIDADE OCTAEDRO\n");
+    printf ("A habilidade CONE, tem como padrão a seguinte formação:\n");
+    printf ("     1     \n");
+    printf ("   1 1 1   \n");
+    printf ("     1    \n");
+    usa_octaedro (tabuleiro);
+    mostrar (tabuleiro);
     
+
+    printf("\nHABILIDADE CRUZ\n");
+    printf ("A habilidade CONE, tem como padrão a seguinte formação:\n");
+    printf ("     1     \n");
+    printf (" 1 1 1 1 1 \n");
+    printf ("     1    \n");
+    usa_cruz (tabuleiro);
+    mostrar (tabuleiro);
+
+    printf("\nChegamos ao fim do nosso jogo após termos utilizado todas as habilidades!");
 
     // Nível Aventureiro - Expansão do Tabuleiro e Posicionamento Diagonal
     // Sugestão: Expanda o tabuleiro para uma matriz 10x10.
